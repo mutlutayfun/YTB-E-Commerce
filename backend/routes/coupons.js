@@ -45,8 +45,7 @@ router.put('/:id', async (req, res) => {
         if (!coupon) {
             return res.status(404).json({ error: "Kupon bulunamadı..." });
         }
-        const updatedCoupon = await Coupon.findByIdAndUpdate
-        (coupon, updateInfo, { new: true });
+        const updatedCoupon = await Coupon.findByIdAndUpdate(coupon, updateInfo, { new: true });
         return res.status(200).json({ updatedCoupon , message: "Kupon güncellendi" });
     } catch (error) {
         return res.status(500).json({ error: "Sunucu hatası..." });
