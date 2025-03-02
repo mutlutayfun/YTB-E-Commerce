@@ -10,12 +10,14 @@ import ShopPage from "./pages/ShopPage"
 import SingleProductPage from "./pages/SingleProductPage"
 import SingleBlogPage from "./pages/SingleBlogPage"
 import CategoryList from "./pages/Admin/Categories/CategoryList"
+import CreateCategory from "./pages/Admin/Categories/CreateCategory"
+import UpdateCategory from "./pages/Admin/Categories/UpdateCategory"
 
 
 function App() {
 
 
-  return (
+  return (//returne le component basmak için html döneriz.
     <>
     <Routes>
 
@@ -28,8 +30,11 @@ function App() {
       <Route path="/single-product" element={<SingleProductPage />} />
       <Route path="/single-blog" element={<SingleBlogPage />} />
       <Route path="/admin/*">
+        <Route index element={<CategoryList/>} />
         <Route path="categories" element={<CategoryList/>} />
-        <Route path="products" element={<CategoryList/>} />
+        <Route path="categories/create" element={<CreateCategory/>} />
+        <Route path="categories/update/:id" element={<UpdateCategory/>} />
+        
       </Route>
 
     </Routes>
