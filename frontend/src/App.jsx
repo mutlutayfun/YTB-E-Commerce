@@ -16,6 +16,7 @@ import UserList from "./pages/Admin/Users/UserList"
 import CreateUser from "./pages/Admin/Users/CreateUser"
 import UpdateUser from "./pages/Admin/Users/UpdateUser"
 import ProductList from "./pages/Admin/Products/ProductList"
+import CreateProduct from "./pages/Admin/Products/CreateProduct"
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
         <Route path="users/create" element={<CreateUser/>} />
         <Route path="users/update/:id" element={<UpdateUser/>}/>
         <Route path="products" element={<ProductList/>}/>
-
+        <Route path="products/create" elements={<CreateProduct/>}/>
         
       </Route>
 
