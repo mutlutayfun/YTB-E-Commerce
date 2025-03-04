@@ -12,6 +12,10 @@ import SingleBlogPage from "./pages/SingleBlogPage"
 import CategoryList from "./pages/Admin/Categories/CategoryList"
 import CreateCategory from "./pages/Admin/Categories/CreateCategory"
 import UpdateCategory from "./pages/Admin/Categories/UpdateCategory"
+import UserList from "./pages/Admin/Users/UserList"
+import CreateUser from "./pages/Admin/Users/CreateUser"
+import UpdateUser from "./pages/Admin/Users/UpdateUser"
+import ProductList from "./pages/Admin/Products/ProductList"
 
 
 function App() {
@@ -34,6 +38,11 @@ function App() {
         <Route path="categories" element={<CategoryList/>} />
         <Route path="categories/create" element={<CreateCategory/>} />
         <Route path="categories/update/:id" element={<UpdateCategory/>} />
+        <Route path="users" element={<UserList/>}/>
+        <Route path="users/create" element={<CreateUser/>} />
+        <Route path="users/update/:id" element={<UpdateUser/>}/>
+        <Route path="products" element={<ProductList/>}/>
+
         
       </Route>
 

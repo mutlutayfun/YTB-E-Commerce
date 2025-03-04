@@ -1,5 +1,5 @@
 import { message, Table } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
  
@@ -36,7 +36,7 @@ function CategoryList() {
           <Button
             color="danger"
             variant="solid"
-            onClick={() => deleteCategories()}
+            onClick={() => deleteCategories(record._id)}
           >
             Delete
           </Button>
@@ -87,10 +87,7 @@ function CategoryList() {
       console.log("Sunucu hatası", error);
     }
   };
-  useEffect(() => {
-    getCategories();
-  }, []);
-  const deleteCategories = async (categoryId) => {
+  const deleteCategories = useCallback(async (categoryId) => {
     try{
       const response= await fetch(`http://localhost:5000/api/categories/${categoryId}`,{
         method: 'DELETE',
@@ -99,17 +96,21 @@ function CategoryList() {
       });
       if(response.ok){
         message.success("Kategori silindi");
-        navigate("/admin/categories")
+        getCategories();
+        console.log(response)
       }
       else{
         message.error("Kategori silme işleminde hata oluştu....")
       }
     }
     catch(error){
-      message.error(`Sunucu hatası : ${error}`)
+      message.error("Sunucu hatası" , error)
     }
-  }
+  },[]);
  
+  useEffect(() => {
+    getCategories();
+  }, []);
   return (
     <>
       <h2>Category List</h2>
