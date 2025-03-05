@@ -49,6 +49,8 @@ function CreateProduct() {
 
   return (
     <>
+      <h2>Create Product Panel</h2>
+      <br /><hr /><br />
       <Form
         layout={formLayout}
         form={form}

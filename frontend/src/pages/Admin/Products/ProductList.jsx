@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Table, Button } from "antd";
+import { useCallback, useEffect, useState } from 'react'
+import { Table, Button,message } from "antd";
 import { useNavigate } from 'react-router-dom';
 
 function ProductList() {
@@ -36,11 +36,31 @@ function ProductList() {
             console.log("Sunucu hatası", error);
         }
     }
-
-    useEffect(() => {
-        getProducts();
+    const deleteProduct = useCallback( async(productId)=>{
+      try {
+        const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+          method: "DELETE",
+          headers : { "Content-Type" : "application/json"},
+          body : JSON.stringify({_id : productId})
+        });
+        if(response.ok){
+          message.success("Product başarıyla silindi.");
+          getProducts();
+          console.log(response)
+        }
+        else{
+          message.error("Product silinirken bir hata oluştu");
+        }
+      } 
+      catch (error) {
+        console.log("Sunucu hatası", error);
+      }
     },[]);
-
+    
+    useEffect(() => {
+      getProducts();
+    },[]);
+    
     const columns = [
         {
           title: 'Image',
@@ -134,7 +154,7 @@ function ProductList() {
               <Button
                 color="danger"
                 variant="solid"
-                onClick={() => {}}
+                onClick={() => deleteProduct(record._id)}
               >
                 Delete
               </Button>
