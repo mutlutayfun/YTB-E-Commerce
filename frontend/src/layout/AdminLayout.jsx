@@ -145,7 +145,7 @@ function AdminLayout({children}) {
       />
       </Sider>
       <Layout>
-        <Header style={{ color : "white"}}>Header</Header>
+        <Header style={{ color : "white"}}></Header>
         <Content style={{ padding:"30px"}}>{children}</Content>
         <Footer style={{}}></Footer>
       </Layout>

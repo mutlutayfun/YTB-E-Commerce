@@ -43,7 +43,7 @@ function App() {
         <Route path="users/create" element={<CreateUser/>} />
         <Route path="users/update/:id" element={<UpdateUser/>}/>
         <Route path="products" element={<ProductList/>}/>
-        <Route path="products/create" elements={<CreateProduct/>}/>
+        <Route path="products/create" element={<CreateProduct/>}/>
         
       </Route>
 
