@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Table, Button } from "antd";
 import { useNavigate } from 'react-router-dom';
-  
-
 
 function ProductList() {
     const [products, setProducts] = useState([]);
@@ -11,30 +9,38 @@ function ProductList() {
     const getProducts = async () => {
         try {
             const [categoryResponse, productResponse] = await Promise.all(
-                [fetch("http://localhost:5000/api/categories"),fetch("http://localhost:5000/api/products")]
+                [fetch("http://localhost:5000/api/categories"), fetch("http://localhost:5000/api/products")]
             );
-            if(!categoryResponse.ok || !productResponse.ok){
+            if (!categoryResponse.ok || !productResponse.ok) {
                 console.log("Veri getirilirken sorun meydana geldi...");
-            }else{
+            } else {
                 const [categoryList, productList] = await Promise.all(
-                    [ categoryResponse.json(), productResponse.json()]
+                    [categoryResponse.json(), productResponse.json()]
                 );
-                const dataSource = productList.map(product => {
-                    const categoryId = product.category;
-                    const category = categoryList.find(category => category._id === categoryId);
-                    return { ...product, categoryName : category ? category.name : "" }
-                });
-                console.log(products);
-                setProducts(dataSource);
+                console.log("Fetched categories:", categoryList);
+                console.log("Fetched products:", productList);
+
+                if (Array.isArray(productList.products)) {
+                    const dataSource = productList.products.map(product => {
+                        const categoryId = product.category;
+                        const category = categoryList.find(category => category._id === categoryId);
+                        return { ...product, categoryName: category ? category.name : "" }
+                    });
+                    console.log("Processed dataSource:", dataSource);
+                    setProducts(dataSource);
+                } else {
+                    console.log("productList.products is not an array:", productList.products);
+                }
             }
         } catch (error) {
-            console.log("Sunucu hatası", error);  
+            console.log("Sunucu hatası", error);
         }
     }
 
     useEffect(() => {
         getProducts();
     },[]);
+
     const columns = [
         {
           title: 'Image',
