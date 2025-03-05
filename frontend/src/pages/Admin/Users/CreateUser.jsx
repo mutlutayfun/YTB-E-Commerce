@@ -48,6 +48,13 @@ function CreateUser() {
           <Input placeholder="User name enter..." />
         </Form.Item>
         <Form.Item
+          label="Role"
+          name="role"
+          rules={[{ required: true, message: "Lütfen rol girin!" }]}
+        >
+          <Input placeholder="Role enter..." />
+        </Form.Item>
+        <Form.Item
           label="Email"
           name="email"
           rules={[{ required: true, message: "Lütfen email girin!" }]}

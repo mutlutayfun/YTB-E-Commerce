@@ -20,6 +20,7 @@ function UpdateUser() {
             username: data.username,
             email: data.email,
             password: data.password,
+            role:data.role,
             _id: userId,
           });
           console.log(form.getFieldsValue());
@@ -36,7 +37,7 @@ function UpdateUser() {
   const handleUpdateUser = async (values) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/register/${userId}`,
+        `http://localhost:5000/api/users/${userId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -75,6 +76,13 @@ function UpdateUser() {
           <Input placeholder="User name enter..." />
         </Form.Item>
         <Form.Item
+          label="Role"
+          name="role"
+          rules={[{ required: true, message: "Lütfen rol girin!" }]}
+        >
+          <Input placeholder="Role enter..." />
+        </Form.Item>
+        <Form.Item
           label="Email"
           name="email"
           rules={[{ required: true, message: "Lütfen email girin!" }]}
@@ -90,7 +98,7 @@ function UpdateUser() {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Create
+            Update
           </Button>
         </Form.Item>
       </Form>
